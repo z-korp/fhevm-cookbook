@@ -1,17 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #e2e5e4;
+  --foreground: #1a1d1b;
   --zama-yellow: #FFD208;
   --zama-yellow-hover: #FFE04A;
   --zama-yellow-dim: rgba(255, 210, 8, 0.15);
-  --bg-surface: #161616;
-  --bg-surface-hover: #1c1c1c;
-  --bg-header: rgba(10, 10, 10, 0.8);
-  --border-default: #222222;
-  --text-secondary: #888888;
-  --text-muted: #555555;
+  --bg-surface: #f2f4f3;
+  --bg-surface-hover: #eef1ef;
+  --bg-dark: #1a1d1b;
+  --bg-header: rgba(226, 229, 228, 0.82);
+  --border-default: #cbd0ce;
+  --border-strong: #484f4b;
+  --text-secondary: #484f4b;
+  --text-muted: #6b7370;
+  --text-on-dark: #e2e5e4;
 }
 
 @theme inline {
@@ -22,18 +25,19 @@
   --color-zama-yellow-dim: var(--zama-yellow-dim);
   --color-surface: var(--bg-surface);
   --color-surface-hover: var(--bg-surface-hover);
+  --color-dark: var(--bg-dark);
   --color-header: var(--bg-header);
   --color-border: var(--border-default);
+  --color-border-strong: var(--border-strong);
   --color-secondary: var(--text-secondary);
   --color-muted: var(--text-muted);
+  --color-on-dark: var(--text-on-dark);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 body {
-  background:
-    radial-gradient(circle at top, rgba(255, 210, 8, 0.08), transparent 28%),
-    linear-gradient(180deg, #0a0a0a 0%, #080808 100%);
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   text-rendering: optimizeLegibility;
@@ -45,7 +49,7 @@ html {
 
 ::selection {
   background: var(--zama-yellow);
-  color: #0a0a0a;
+  color: #1a1d1b;
 }
 
 a:focus-visible,
@@ -63,7 +67,7 @@ button:focus-visible {
   border-radius: 0;
   background: transparent;
   box-shadow: none;
-  color: var(--zama-yellow);
+  color: var(--foreground);
   font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: 11px;
   line-height: 1.1;
@@ -76,6 +80,108 @@ button:focus-visible {
 @media (max-width: 720px) {
   .ascii-logo {
     font-size: 7px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * CubeField — continuous radial pulse over a grid of small cubes.
+ * Two layered animations per cube:
+ *   - outer wrap scales (radial wave from centre)
+ *   - inner tile fades (diagonal sweep, out of phase)
+ * ------------------------------------------------------------------------- */
+.cube-field-scene {
+  position: relative;
+  max-width: 100%;
+  background-image: radial-gradient(
+    circle,
+    rgba(26, 29, 27, 0.22) 0.8px,
+    transparent 1.4px
+  );
+  background-size: var(--cell) var(--cell);
+  background-position: calc(var(--cell) / 2) calc(var(--cell) / 2);
+  /* Soft-fade the whole scene (dots + cubes) into the page background
+   * so the field doesn't look like a rectangle dropped on top. */
+  -webkit-mask-image: radial-gradient(
+    ellipse 75% 60% at 50% 50%,
+    #000 48%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 75% 60% at 50% 50%,
+    #000 48%,
+    transparent 100%
+  );
+}
+
+.cube-field-wrap {
+  position: absolute;
+  display: block;
+  transform-origin: center;
+  animation: cube-field-pulse 3.6s ease-in-out infinite both;
+  will-change: transform;
+}
+
+.cube-field-tile {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #1a1d1b;
+  border-radius: 1px;
+  animation: cube-field-breathe 5.4s ease-in-out infinite both;
+  will-change: opacity;
+}
+
+.cube-field-tile.is-accent {
+  background: var(--zama-yellow);
+  box-shadow: 0 0 0 1px rgba(255, 210, 8, 0.25);
+}
+
+/* Static anchors — a sprinkling of calm cubes to ground the field. */
+.cube-field-wrap.is-still {
+  animation: none;
+  transform: scale(0.55);
+}
+.cube-field-tile.is-still {
+  animation: none;
+  opacity: 0.35;
+}
+
+@keyframes cube-field-pulse {
+  0% {
+    transform: scale(0.15);
+  }
+  14% {
+    transform: scale(1.05);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.7, 1);
+  }
+  42% {
+    transform: scale(0.45);
+  }
+  100% {
+    transform: scale(0.15);
+  }
+}
+
+@keyframes cube-field-breathe {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cube-field-wrap,
+  .cube-field-tile {
+    animation: none !important;
+  }
+  .cube-field-wrap {
+    transform: scale(0.7);
+  }
+  .cube-field-tile {
+    opacity: 0.7;
   }
 }
 
@@ -110,7 +216,7 @@ button:focus-visible {
 }
 
 .snippet-prose p {
-  color: #cbcbcb;
+  color: var(--text-secondary);
 }
 
 .snippet-prose a {
@@ -132,7 +238,7 @@ button:focus-visible {
 .snippet-prose ul,
 .snippet-prose ol {
   padding-left: 1.4em;
-  color: #cbcbcb;
+  color: var(--text-secondary);
 }
 
 .snippet-prose ul {
@@ -164,16 +270,16 @@ button:focus-visible {
 }
 
 .snippet-prose :not(pre) > code {
-  background: #1c1c1c;
+  background: var(--bg-surface);
   border: 1px solid var(--border-default);
   border-radius: 4px;
   padding: 0.1em 0.4em;
-  color: #f0f0f0;
+  color: var(--foreground);
 }
 
 .snippet-prose pre {
-  background: #111111;
-  border: 1px solid var(--border-default);
+  background: var(--bg-dark);
+  border: 1px solid var(--bg-dark);
   border-radius: 10px;
   padding: 1rem 1.15rem;
   overflow-x: auto;
@@ -185,7 +291,7 @@ button:focus-visible {
   background: transparent;
   border: 0;
   padding: 0;
-  color: #e8e8e8;
+  color: var(--text-on-dark);
 }
 
 .snippet-prose table {
@@ -204,7 +310,7 @@ button:focus-visible {
 }
 
 .snippet-prose th {
-  background: #141414;
+  background: var(--bg-surface);
   color: var(--foreground);
   font-weight: 600;
   font-size: 11px;

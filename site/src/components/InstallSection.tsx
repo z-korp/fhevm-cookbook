@@ -2,69 +2,70 @@ import CopyCommandButton from "@/components/CopyCommandButton";
 import { FULL_PACK_COMMAND, LIST_SKILLS_COMMAND } from "@/data/install";
 import { SKILLS_SH_URL } from "@/data/site";
 
-function CommandRow({
-  label,
-  command,
-}: {
-  label: string;
-  command: string;
-}) {
-  return (
-    <div className="rounded-xl border border-border bg-background/30 p-3">
-      <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.24em] text-muted">
-        {label}
-      </p>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <code className="min-w-0 flex-1 break-all font-mono text-xs leading-relaxed text-foreground">
-          {command}
-        </code>
-        <CopyCommandButton text={command} />
-      </div>
-    </div>
-  );
-}
-
 export default function InstallSection() {
   return (
-    <section id="install" className="border-t border-border py-16 scroll-mt-24 sm:py-20">
-      <div>
-        <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.32em] text-zama-yellow">
-          Install
-        </p>
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-          Install the cookbook in one command.
-        </h2>
-        <p className="mt-4 text-sm leading-relaxed text-secondary sm:text-base">
-          This uses the open{" "}
-          <a
-            href={SKILLS_SH_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-zama-yellow"
-          >
-            skills
-          </a>{" "}
-          CLI. Most teams should start with the full install. If you only need one specialist module, the skills catalog below includes a single-skill command on each card.
-        </p>
-      </div>
-
-      <div className="mt-8 rounded-2xl border border-border bg-surface/80 p-5 sm:p-6">
-        <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.24em] text-zama-yellow">
-          Recommended
-        </p>
-        <h3 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl">
-          Install all shipped skills from this repo
-        </h3>
-        <p className="mt-2 text-sm leading-relaxed text-secondary">
-          Start here if you want the router and the full Zama cookbook available in one place.
-        </p>
-
-        <div className="mt-4">
-          <CommandRow label="Default install" command={FULL_PACK_COMMAND} />
+    <section
+      id="install"
+      className="scroll-mt-24 border-b border-border py-20 sm:py-24"
+    >
+      <div className="grid gap-12 lg:grid-cols-[430px_1fr] lg:items-start lg:gap-16">
+        {/* Left column */}
+        <div className="max-w-[430px]">
+          <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.32em] text-foreground">
+            ▸ 01 · Install
+          </p>
+          <h2 className="text-[40px] font-semibold leading-[1.02] tracking-[-0.025em] text-foreground sm:text-[44px]">
+            One command.
+            <br />
+            Fully wired.
+          </h2>
+          <p className="mt-6 text-[15px] leading-[1.6] text-secondary">
+            Uses the open{" "}
+            <a
+              href={SKILLS_SH_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
+            >
+              skills
+            </a>{" "}
+            CLI. Most teams should start with the full install. Single-skill
+            commands are available on each catalog card.
+          </p>
         </div>
 
-        <div className="mt-4">
-          <CommandRow label="Inspect before installing" command={LIST_SKILLS_COMMAND} />
+        {/* Right column — commands */}
+        <div className="flex flex-col gap-3">
+          {/* Primary (dark) command card */}
+          <div className="rounded-2xl border border-foreground bg-foreground p-5 sm:p-6">
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-zama-yellow">
+                Recommended · Default install
+              </p>
+              <span className="rounded-full bg-zama-yellow px-2 py-[3px] text-[9px] font-bold uppercase tracking-[0.22em] text-foreground">
+                Recommended
+              </span>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <code className="min-w-0 flex-1 break-all font-mono text-[13px] leading-[1.5] text-on-dark">
+                {FULL_PACK_COMMAND}
+              </code>
+              <CopyCommandButton text={FULL_PACK_COMMAND} variant="yellow" />
+            </div>
+          </div>
+
+          {/* Secondary (light) command card */}
+          <div className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-muted">
+              Inspect before installing
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <code className="min-w-0 flex-1 break-all font-mono text-[13px] leading-[1.5] text-foreground">
+                {LIST_SKILLS_COMMAND}
+              </code>
+              <CopyCommandButton text={LIST_SKILLS_COMMAND} variant="dark" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
