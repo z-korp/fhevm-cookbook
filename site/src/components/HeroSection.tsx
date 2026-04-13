@@ -1,7 +1,7 @@
 import { skills } from '@/data/skills';
 import { DOCS_URL } from '@/data/site';
-import CubeField from '@/components/CubeField';
-import HeroArtifacts from '@/components/HeroArtifacts';
+import HeroTitle from '@/components/HeroTitle';
+import AsciiFhe from '@/components/AsciiFhe';
 
 const fhevmSkillCount = skills.filter((s) => s.topic === 'fhevm' && s.id !== 'fhevm-router').length;
 const erc7984SkillCount = skills.filter((s) => s.topic === 'erc7984').length;
@@ -9,20 +9,9 @@ const erc7984SkillCount = skills.filter((s) => s.topic === 'erc7984').length;
 export default function HeroSection() {
   return (
     <section className="relative border-b border-border py-20 sm:py-24 lg:py-28">
-      {/* Diffuse artifact layer — sparse blinking cubes across the whole hero,
-          tying the CubeField blob to the surrounding copy so the section
-          reads as a single scene. */}
-      <HeroArtifacts />
       <div className="relative z-10 grid gap-14 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
         <div className="max-w-[620px]">
-          {/* Heading */}
-          <h1 className="text-[56px] font-semibold leading-[0.95] tracking-[-0.035em] text-foreground sm:text-[72px] lg:text-[88px]">
-            Confidential
-            <br />
-            contracts,
-            <br />
-            <span className="text-secondary">without the guesswork.</span>
-          </h1>
+          <HeroTitle />
 
           <p className="mt-10 max-w-[576px] text-[17px] leading-[1.55] text-secondary">
             A builder and agent layer for Zama FHEVM — task routing, verified
@@ -71,8 +60,8 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="flex justify-center lg:justify-end">
-          <CubeField />
+        <div className="hidden lg:flex lg:justify-end">
+          <AsciiFhe />
         </div>
       </div>
     </section>
