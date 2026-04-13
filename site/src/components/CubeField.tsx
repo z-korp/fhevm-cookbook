@@ -106,26 +106,57 @@ function buildCubes(): Cube[] {
   const cx = (COLS - 1) / 2;
   const cy = (ROWS - 1) / 2;
 
+  // Blob silhouette: cubes live inside an irregular radius whose boundary is
+  // pushed in/out by noise, so the outer edge reads as organic — not a grid
+  // masked to an ellipse. Aspect scaling matches the 44×58 rectangle.
+  const baseRadius = Math.min(COLS, ROWS) * 0.48;
+
   for (let y = 0; y < ROWS; y++) {
     for (let x = 0; x < COLS; x++) {
       const dx = x - cx;
       const dy = y - cy;
-      const dist = Math.hypot(dx, dy);
+      // Weighted distance so the blob is slightly taller than it is wide,
+      // matching the field's aspect ratio without flattening into an ellipse.
+      const ellDist = Math.hypot(dx * 1.22, dy * 0.92);
       const noise = hash(x, y);
-
-      // Radial outgoing wave. Negative delay so every cube is already mid-cycle
-      // on first paint — no ugly cold-start flash.
-      const delayA = -(dist * 0.14 + noise * 0.35);
-      // Diagonal sweep, slower and out of phase with the pulse.
-      const delayB = -((x + y) * 0.07 + noise * 0.25);
+      const edgeNoise = hash(x * 2.7 + 13, y * 1.9 + 7);
 
       const fhe = isFheCell(x, y);
 
+      // Irregular boundary — bumped in/out per-cell for a ragged perimeter.
+      const boundary = baseRadius + (edgeNoise - 0.5) * 8;
+      const insideBlob = ellDist < boundary;
+
+      // Scattered fragment cubes outside the main blob — they keep the same
+      // pulse/breathe rhythm so they read as detached pieces, not debris.
+      let fragment = false;
+      if (!fhe && !insideBlob) {
+        const falloff = Math.max(0, 1 - (ellDist - boundary) / 10);
+        if (falloff > 0 && noise > 1 - 0.22 * falloff) {
+          fragment = true;
+        } else {
+          continue;
+        }
+      }
+
+      // Radial outgoing wave. Negative delay so every cube is already mid-cycle
+      // on first paint — no ugly cold-start flash. FHE glyph cubes all share
+      // delay 0 so they light up in unison with the centre of the wave (and
+      // extinguish together as it radiates outward).
+      const delayA = fhe ? 0 : -(ellDist * 0.14 + noise * 0.35);
+      // Diagonal sweep, slower and out of phase with the pulse. Same sync
+      // trick for FHE so the breathe peaks land together across all cells.
+      const delayB = fhe ? 0 : -((x + y) * 0.07 + noise * 0.25);
+
       // FHE cubes are always yellow, always animated, and a touch larger
       // so they read as letters through the background noise.
-      const accent = fhe || noise > 0.965;
-      const still = !fhe && noise > 0.4 && noise < 0.47;
-      const size = fhe ? 6.8 + noise * 0.6 : 5 + noise * 2;
+      const accent = fhe || noise > 0.965 || (fragment && noise > 0.75);
+      const still = !fhe && !fragment && noise > 0.4 && noise < 0.47;
+      const size = fhe
+        ? 6.8 + noise * 0.6
+        : fragment
+          ? 3.4 + noise * 2.2
+          : 5 + noise * 2;
 
       cubes.push({ x, y, size, delayA, delayB, accent, still });
     }

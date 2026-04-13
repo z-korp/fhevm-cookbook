@@ -92,25 +92,10 @@ button:focus-visible {
 .cube-field-scene {
   position: relative;
   max-width: 100%;
-  background-image: radial-gradient(
-    circle,
-    rgba(26, 29, 27, 0.22) 0.8px,
-    transparent 1.4px
-  );
-  background-size: var(--cell) var(--cell);
-  background-position: calc(var(--cell) / 2) calc(var(--cell) / 2);
-  /* Soft-fade the whole scene (dots + cubes) into the page background
-   * so the field doesn't look like a rectangle dropped on top. */
-  -webkit-mask-image: radial-gradient(
-    ellipse 75% 60% at 50% 50%,
-    #000 48%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse 75% 60% at 50% 50%,
-    #000 48%,
-    transparent 100%
-  );
+  /* No background dots, no mask — the blob-shaped cube placement (with
+   * noise-driven perimeter and scattered fragment cubes) defines the
+   * silhouette, so we do not want a rectangle of dots or an ellipse mask
+   * re-imposing a regular outline on top. */
 }
 
 .cube-field-wrap {

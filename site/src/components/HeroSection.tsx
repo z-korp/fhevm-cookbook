@@ -1,14 +1,19 @@
 import { skills } from '@/data/skills';
 import { DOCS_URL } from '@/data/site';
 import CubeField from '@/components/CubeField';
+import HeroArtifacts from '@/components/HeroArtifacts';
 
 const fhevmSkillCount = skills.filter((s) => s.topic === 'fhevm' && s.id !== 'fhevm-router').length;
 const erc7984SkillCount = skills.filter((s) => s.topic === 'erc7984').length;
 
 export default function HeroSection() {
   return (
-    <section className="border-b border-border py-20 sm:py-24 lg:py-28">
-      <div className="grid gap-14 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
+    <section className="relative border-b border-border py-20 sm:py-24 lg:py-28">
+      {/* Diffuse artifact layer — sparse blinking cubes across the whole hero,
+          tying the CubeField blob to the surrounding copy so the section
+          reads as a single scene. */}
+      <HeroArtifacts />
+      <div className="relative z-10 grid gap-14 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
         <div className="max-w-[620px]">
           {/* Version badge */}
           <div className="mb-16 inline-flex items-center gap-2 rounded-full border border-border-strong pl-3 pr-4 py-[6px]">
