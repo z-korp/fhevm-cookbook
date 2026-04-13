@@ -58,31 +58,6 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-.ascii-logo {
-  max-width: 100%;
-  overflow-x: auto;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--foreground);
-  font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 11px;
-  line-height: 1.1;
-  letter-spacing: 0;
-  font-kerning: none;
-  font-variant-ligatures: none;
-  white-space: pre;
-}
-
-@media (max-width: 720px) {
-  .ascii-logo {
-    font-size: 7px;
-  }
-}
-
 /* ---------------------------------------------------------------------------
  * CubeField — continuous radial pulse over a grid of small cubes.
  * Two layered animations per cube:

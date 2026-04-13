@@ -15,14 +15,6 @@ export default function HeroSection() {
       <HeroArtifacts />
       <div className="relative z-10 grid gap-14 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
         <div className="max-w-[620px]">
-          {/* Version badge */}
-          <div className="mb-16 inline-flex items-center gap-2 rounded-full border border-border-strong pl-3 pr-4 py-[6px]">
-            <span aria-hidden="true" className="size-[6px] rounded-full bg-zama-yellow" />
-            <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-foreground">
-              FHEVM Cookbook · v0.1
-            </span>
-          </div>
-
           {/* Heading */}
           <h1 className="text-[56px] font-semibold leading-[0.95] tracking-[-0.035em] text-foreground sm:text-[72px] lg:text-[88px]">
             Confidential

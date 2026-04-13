@@ -10,13 +10,6 @@ export const metadata: Metadata = {
     "Short, copyable recipes for common FHEVM tasks. Each article answers one question with prose and paste-ready code.",
 };
 
-const ASCII_SNIPPETS = `███████╗███╗   ██╗██╗██████╗ ██████╗ ███████╗████████╗███████╗
-██╔════╝████╗  ██║██║██╔══██╗██╔══██╗██╔════╝╚══██╔══╝██╔════╝
-███████╗██╔██╗ ██║██║██████╔╝██████╔╝█████╗     ██║   ███████╗
-╚════██║██║╚██╗██║██║██╔═══╝ ██╔═══╝ ██╔══╝     ██║   ╚════██║
-███████║██║ ╚████║██║██║     ██║     ███████╗   ██║   ███████║
-╚══════╝╚═╝  ╚═══╝╚═╝╚═╝     ╚═╝     ╚══════╝   ╚═╝   ╚══════╝`;
-
 function formatDate(iso: string) {
   if (!iso) return "";
   const d = new Date(iso);
@@ -35,14 +28,10 @@ export default function SnippetsIndexPage() {
     <>
       <Header />
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 pt-16 pb-20">
-        <pre className="ascii-logo mb-10" aria-hidden="true">
-          {ASCII_SNIPPETS}
-        </pre>
-
-        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-          Snippets for common FHEVM tasks.
+        <h1 className="mb-6 text-[56px] font-semibold leading-[0.95] tracking-[-0.035em] text-foreground sm:text-[72px] lg:text-[88px]">
+          Snippets
         </h1>
-        <p className="mb-12 max-w-2xl text-sm leading-relaxed text-secondary sm:text-base">
+        <p className="mb-12 max-w-2xl text-base leading-relaxed text-secondary sm:text-lg">
           Short, copyable recipes. Each one answers a single &ldquo;how do I do
           X on FHEVM?&rdquo; with prose, paste-ready code, and the reasoning
           behind the shape.
