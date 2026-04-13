@@ -131,6 +131,51 @@ button:focus-visible {
   opacity: 0.35;
 }
 
+/* FHE glyph cubes — invisible by default (indistinguishable from the rest of
+ * the field). Hovering the scene flips JS state to `.is-revealed`, which:
+ *   1. transitions the FHE cubes to yellow with a left-to-right stagger,
+ *   2. stops their pulse/breathe so the letters hold steady at scale 1.05
+ *      and opacity 1 for as long as the mouse remains over the scene.
+ * Using a JS-driven class instead of `:hover` lets us cleanly remove the
+ * running keyframe animations and trigger transitions in the same frame —
+ * `:hover` + animation removal didn't reliably trigger transitions in some
+ * browsers. */
+.cube-field-wrap.is-fhe {
+  transition: transform 0.35s ease-out;
+  transition-delay: var(--reveal-delay, 0s);
+}
+.cube-field-tile.is-fhe {
+  transition:
+    background-color 0.35s ease-out,
+    box-shadow 0.35s ease-out,
+    opacity 0.35s ease-out;
+  transition-delay: var(--reveal-delay, 0s);
+}
+.cube-field-scene.is-revealed .cube-field-wrap.is-fhe {
+  animation: none;
+  transform: scale(1.05);
+}
+.cube-field-scene.is-revealed .cube-field-tile.is-fhe {
+  animation: none;
+  opacity: 1;
+  background: var(--zama-yellow);
+  box-shadow: 0 0 0 1px rgba(255, 210, 8, 0.25);
+}
+/* Touch devices have no hover — reveal FHE permanently so the branding
+ * is not lost. */
+@media (hover: none) {
+  .cube-field-wrap.is-fhe {
+    animation: none;
+    transform: scale(1.05);
+  }
+  .cube-field-tile.is-fhe {
+    animation: none;
+    opacity: 1;
+    background: var(--zama-yellow);
+    box-shadow: 0 0 0 1px rgba(255, 210, 8, 0.25);
+  }
+}
+
 @keyframes cube-field-pulse {
   0% {
     transform: scale(0.15);

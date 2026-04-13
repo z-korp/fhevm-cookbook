@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 const COLS = 44;
 const ROWS = 58;
@@ -94,6 +94,8 @@ type Cube = {
   delayB: number; // drives the diagonal breath (opacity)
   accent: boolean;
   still: boolean; // a few cubes stay quiet to anchor the field
+  fhe: boolean; // FHE glyph cells — revealed on hover only
+  revealDelay: number; // per-cell stagger for the hover reveal (s)
 };
 
 function hash(x: number, y: number): number {
@@ -140,25 +142,25 @@ function buildCubes(): Cube[] {
       }
 
       // Radial outgoing wave. Negative delay so every cube is already mid-cycle
-      // on first paint — no ugly cold-start flash. FHE glyph cubes all share
-      // delay 0 so they light up in unison with the centre of the wave (and
-      // extinguish together as it radiates outward).
-      const delayA = fhe ? 0 : -(ellDist * 0.14 + noise * 0.35);
-      // Diagonal sweep, slower and out of phase with the pulse. Same sync
-      // trick for FHE so the breathe peaks land together across all cells.
-      const delayB = fhe ? 0 : -((x + y) * 0.07 + noise * 0.25);
+      // on first paint — no ugly cold-start flash. FHE cubes use the same
+      // natural phase as their neighbours so they're indistinguishable from
+      // the surrounding pattern when not hovered.
+      const delayA = -(ellDist * 0.14 + noise * 0.35);
+      // Diagonal sweep, slower and out of phase with the pulse.
+      const delayB = -((x + y) * 0.07 + noise * 0.25);
 
-      // FHE cubes are always yellow, always animated, and a touch larger
-      // so they read as letters through the background noise.
-      const accent = fhe || noise > 0.965 || (fragment && noise > 0.75);
+      // FHE cubes get no default color or size boost — they blend in until
+      // hover triggers the reveal. Background sparkle + fragment accents are
+      // kept as before.
+      const accent = (!fhe && noise > 0.965) || (fragment && noise > 0.75);
       const still = !fhe && !fragment && noise > 0.4 && noise < 0.47;
-      const size = fhe
-        ? 6.8 + noise * 0.6
-        : fragment
-          ? 3.4 + noise * 2.2
-          : 5 + noise * 2;
+      const size = fragment ? 3.4 + noise * 2.2 : 5 + noise * 2;
 
-      cubes.push({ x, y, size, delayA, delayB, accent, still });
+      // Left-to-right wipe when the reveal triggers — delay grows with the
+      // cube's column across the FHE glyph band. Non-FHE cubes get 0.
+      const revealDelay = fhe ? (x - FHE_START_X) * 0.018 : 0;
+
+      cubes.push({ x, y, size, delayA, delayB, accent, still, fhe, revealDelay });
     }
   }
   return cubes;
@@ -166,14 +168,17 @@ function buildCubes(): Cube[] {
 
 export default function CubeField() {
   const cubes = useMemo(() => buildCubes(), []);
+  const [revealed, setRevealed] = useState(false);
   const width = COLS * CELL;
   const height = ROWS * CELL;
 
   return (
     <div
-      className="cube-field-scene"
+      className={`cube-field-scene${revealed ? " is-revealed" : ""}`}
       role="img"
-      aria-label="Animated field of encrypted data with FHE inscribed in yellow"
+      aria-label="Animated field of encrypted data — hover to reveal FHE"
+      onMouseEnter={() => setRevealed(true)}
+      onMouseLeave={() => setRevealed(false)}
       style={
         {
           width,
@@ -185,8 +190,8 @@ export default function CubeField() {
       {cubes.map((c, i) => {
         const left = c.x * CELL + (CELL - c.size) / 2;
         const top = c.y * CELL + (CELL - c.size) / 2;
-        const wrapClass = `cube-field-wrap${c.still ? " is-still" : ""}`;
-        const tileClass = `cube-field-tile${c.accent ? " is-accent" : ""}${c.still ? " is-still" : ""}`;
+        const wrapClass = `cube-field-wrap${c.still ? " is-still" : ""}${c.fhe ? " is-fhe" : ""}`;
+        const tileClass = `cube-field-tile${c.accent ? " is-accent" : ""}${c.still ? " is-still" : ""}${c.fhe ? " is-fhe" : ""}`;
         return (
           <span
             key={i}
@@ -201,7 +206,12 @@ export default function CubeField() {
           >
             <span
               className={tileClass}
-              style={{ animationDelay: `${c.delayB}s` }}
+              style={
+                {
+                  animationDelay: `${c.delayB}s`,
+                  "--reveal-delay": `${c.revealDelay}s`,
+                } as CSSProperties
+              }
             />
           </span>
         );
