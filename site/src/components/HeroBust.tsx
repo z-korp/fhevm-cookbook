@@ -129,15 +129,15 @@ function HalftonePass() {
       const withStrip = mix(revealed, passthrough, clippedStrip);
 
       // ── Outline: edge detection on bust silhouette alpha ──
-      const outlineWidth = float(5); // pixels
+      const outlineWidth = float(1.2);
       const px = outlineWidth.div(screenSize);
       const aL = sceneTexture.sample(screenUV.sub(vec2(px.x, float(0)))).w;
       const aR = sceneTexture.sample(screenUV.add(vec2(px.x, float(0)))).w;
       const aU = sceneTexture.sample(screenUV.sub(vec2(float(0), px.y))).w;
       const aD = sceneTexture.sample(screenUV.add(vec2(float(0), px.y))).w;
-      const edgeStrength = smoothstep(float(0.1), float(0.6), abs(aR.sub(aL)).add(abs(aD.sub(aU))));
-      const olC = new THREE.Color("#FFD208");
-      const outlineColor = vec3(olC.r, olC.g, olC.b);
+      const edgeRaw = abs(aR.sub(aL)).add(abs(aD.sub(aU)));
+      const edgeStrength = smoothstep(float(0.2), float(0.8), edgeRaw);
+      const outlineColor = vec3(0, 0, 0);
       const finalColor = mix(withStrip, outlineColor, edgeStrength);
 
       return vec4(finalColor, sceneAlpha);
@@ -197,7 +197,9 @@ function FlutedGlassPlane() {
       const refracted = accumulated.div(float(smearSamples)).xyz;
       const edgeDist = abs(withinColumn.sub(0.5)).mul(2.0);
       const gapDarken = smoothstep(float(0.8), float(1.0), edgeDist).mul(ridgeGap);
-      return refracted.mul(float(1.0).sub(gapDarken));
+      const dimmed = refracted.mul(float(1.0).sub(gapDarken));
+      const tint = vec3(1.0, 0.82, 0.03); // #FFD208 yellow
+      return dimmed.mul(tint);
     })();
 
     // Clip to bust silhouette — aggressive threshold to avoid edge artifacts
@@ -240,7 +242,9 @@ export default function HeroBust() {
 
   const handleCreated = useCallback((stateGl: { gl: THREE.WebGLRenderer }) => {
     const gl = stateGl.gl as unknown as WebGPURenderer;
-    gl.init().then(() => setReady(true));
+    gl.init()
+      .then(() => setReady(true))
+      .catch((err: unknown) => console.error("[HeroBust] WebGPU init failed:", err));
   }, []);
 
   return (
