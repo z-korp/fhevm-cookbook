@@ -42,7 +42,7 @@ export default function InstallActionButton() {
     return (
       <a
         href="#install"
-        className="inline-flex items-center rounded-full bg-foreground px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-on-dark transition-colors hover:bg-zama-yellow hover:text-foreground"
+        className="inline-flex items-center whitespace-nowrap rounded-full bg-foreground px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-on-dark transition-colors hover:bg-zama-yellow hover:text-foreground sm:px-5 sm:py-2 sm:text-[12px] sm:tracking-[0.18em]"
       >
         Skills install
       </a>
@@ -90,7 +90,7 @@ export default function InstallActionButton() {
       <button
         type="button"
         onClick={() => setIsInstallOpen(true)}
-        className="inline-flex items-center rounded-full bg-foreground px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-on-dark transition-colors hover:bg-zama-yellow hover:text-foreground"
+        className="inline-flex items-center whitespace-nowrap rounded-full bg-foreground px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-on-dark transition-colors hover:bg-zama-yellow hover:text-foreground sm:px-5 sm:py-2 sm:text-[12px] sm:tracking-[0.18em]"
       >
         Skills install
       </button>

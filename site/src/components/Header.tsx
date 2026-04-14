@@ -2,6 +2,7 @@ import Link from "next/link";
 import { CONTENT_LAST_UPDATED_ISO, CONTENT_LAST_UPDATED_LABEL } from "@/data/content-last-updated";
 import { REPO_URL } from "@/data/site";
 import InstallActionButton from "@/components/InstallActionButton";
+import MobileMenu from "@/components/MobileMenu";
 
 const NAV_ITEMS = [
   { label: "Skills", href: "/skills" },
@@ -13,16 +14,16 @@ const NAV_ITEMS = [
 export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-header backdrop-blur-md">
-      <div className="mx-auto flex max-w-[90rem] items-start justify-between gap-6 px-5 py-3 sm:items-center sm:px-6 lg:px-9">
-        <div className="flex flex-col gap-1">
+      <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-3 px-5 py-3 sm:gap-6 sm:px-6 lg:px-9">
+        <div className="flex min-w-0 flex-col gap-1">
           <div className="flex items-center gap-3">
             <span
               aria-hidden="true"
-              className="inline-block size-2.5 rounded-full bg-zama-yellow shadow-[0_0_0_4px_rgba(255,210,8,0.16)]"
+              className="inline-block size-2.5 shrink-0 rounded-full bg-zama-yellow shadow-[0_0_0_4px_rgba(255,210,8,0.16)]"
             />
             <Link
               href="/"
-              className="text-[14px] font-semibold uppercase tracking-[0.18em] text-foreground"
+              className="whitespace-nowrap text-[14px] font-semibold uppercase tracking-[0.18em] text-foreground"
             >
               FHEVM Cookbook
             </Link>
@@ -38,7 +39,7 @@ export default function Header() {
               </a>
             </span>
           </div>
-          <p className="text-[11px] tracking-[0.16em] text-muted">
+          <p className="whitespace-nowrap text-[11px] tracking-[0.16em] text-muted">
             Content updated{" "}
             <time dateTime={CONTENT_LAST_UPDATED_ISO}>{CONTENT_LAST_UPDATED_LABEL}</time>
           </p>
@@ -68,7 +69,10 @@ export default function Header() {
           )}
         </nav>
 
-        <InstallActionButton />
+        <div className="flex shrink-0 items-center gap-2">
+          <InstallActionButton />
+          <MobileMenu />
+        </div>
       </div>
     </header>
   );
