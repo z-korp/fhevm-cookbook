@@ -20,7 +20,7 @@ export const CATEGORY_LABELS: Record<SkillCategory, string> = {
 };
 
 export const LIST_SKILLS_COMMAND = `npx skills add ${REPO_SLUG} --list`;
-export const FULL_PACK_COMMAND = `npx skills add ${REPO_SLUG}`;
+export const FULL_PACK_COMMAND = `npx skills add ${REPO_SLUG} --all`;
 
 function uniqueSkillIds(skillIds: string[]) {
   return skillIds.filter((id, index) => skillIds.indexOf(id) === index);
