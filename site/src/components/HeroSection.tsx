@@ -13,7 +13,7 @@ export default function HeroSection() {
     <section className="relative isolate py-20 sm:py-24 lg:py-28">
       <div
         aria-hidden="true"
-        className="hero-grid pointer-events-none absolute left-1/2 top-0 h-full w-screen -translate-x-1/2"
+        className="hero-grid pointer-events-none absolute inset-0 h-full w-full"
       />
 
       <div className="hidden lg:block absolute right-0 top-8 bottom-8 w-[420px] z-0">
