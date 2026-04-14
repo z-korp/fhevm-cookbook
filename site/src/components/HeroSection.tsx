@@ -3,7 +3,8 @@ import { DOCS_URL } from '@/data/site';
 import HeroTitle from '@/components/HeroTitle';
 
 const fhevmSkillCount = skills.filter((s) => s.topic === 'fhevm' && s.id !== 'fhevm-router').length;
-const erc7984SkillCount = skills.filter((s) => s.topic === 'erc7984').length;
+const erc7984SkillCount = skills.filter((s) => s.topic === 'oz-erc7984').length;
+const ozUtilsSkillCount = skills.filter((s) => s.topic === 'oz-utils').length;
 
 export default function HeroSection() {
   return (
@@ -56,6 +57,11 @@ export default function HeroSection() {
           <span className="text-foreground">
             {erc7984SkillCount}{' '}
             <span className="font-normal text-muted">ERC7984</span>
+          </span>
+          <span aria-hidden="true" className="h-px w-6 bg-border" />
+          <span className="text-foreground">
+            {ozUtilsSkillCount}{' '}
+            <span className="font-normal text-muted">OZ UTILS</span>
           </span>
           <span aria-hidden="true" className="h-px w-6 bg-border" />
           <span className="text-foreground">
