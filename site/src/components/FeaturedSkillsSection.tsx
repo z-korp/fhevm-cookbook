@@ -16,7 +16,7 @@ function FeaturedCard({ skill, index }: { skill: Skill; index: number }) {
   return (
     <Link
       href={`/skills#${skill.id}`}
-      className="group flex flex-col rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-foreground"
+      className={`group flex flex-col rounded-2xl p-6 ${index === 0 ? "border-beam-card" : "border border-border bg-surface transition-colors hover:border-foreground"}`}
     >
       <div className="flex items-center justify-between">
         <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted">

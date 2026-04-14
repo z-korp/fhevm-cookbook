@@ -1,10 +1,10 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #e2e5e4;
   --foreground: #1a1d1b;
-  --zama-yellow: #FFD208;
-  --zama-yellow-hover: #FFE04A;
+  --zama-yellow: #ffd208;
+  --zama-yellow-hover: #ffe04a;
   --zama-yellow-dim: rgba(255, 210, 8, 0.15);
   --bg-surface: #f2f4f3;
   --bg-surface-hover: #eef1ef;
@@ -56,6 +56,197 @@ a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--zama-yellow);
   outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Hero grid — subtle rectilinear pattern that fades out toward the bottom.
+ * Stays within the container so its lines align with the glow beam.
+ * ------------------------------------------------------------------------- */
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.055) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.3) 50%, transparent 85%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.3) 50%, transparent 85%);
+}
+
+/* ---------------------------------------------------------------------------
+ * Glow beam — vertical accent line that runs the full height of <main>.
+ * Three concentric layers: wide soft halo → inner glow → sharp core line.
+ * Positioned at 75 % of the container — lands on the 13th 64 px grid line.
+ * ------------------------------------------------------------------------- */
+.glow-beam {
+  position: absolute;
+  top: 0;
+  left: 75%;
+  width: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Wide soft halo — hard cutoff before install section */
+.glow-beam-halo {
+  position: absolute;
+  inset: 0;
+  width: 120px;
+  transform: translateX(-50%);
+  background: rgba(255, 210, 8, 0.08);
+  filter: blur(18px);
+  animation: glow-breathe 6s ease-in-out infinite;
+}
+
+/* Inner concentrated glow */
+.glow-beam-inner {
+  position: absolute;
+  inset: 0;
+  width: 44px;
+  transform: translateX(-50%);
+  background: rgba(255, 210, 8, 0.25);
+  filter: blur(8px);
+  animation: glow-breathe 6s ease-in-out infinite;
+}
+
+/* Sharp core line — no box-shadow (it would span full height) */
+.glow-beam-core {
+  position: absolute;
+  inset: 0;
+  width: 5px;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  background: var(--zama-yellow);
+}
+
+/* Floating particles around the beam */
+.glow-beam-particle {
+  position: absolute;
+  left: 0;
+  top: var(--p-y);
+  width: var(--p-size);
+  height: var(--p-size);
+  border-radius: 50%;
+  background: var(--zama-yellow);
+  box-shadow: 0 0 4px 1px rgba(255, 210, 8, 0.45);
+  transform: translate(var(--p-x), 0);
+  opacity: 0;
+  animation: glow-particle-float var(--p-dur) ease-in-out var(--p-delay) infinite;
+  pointer-events: none;
+}
+
+@keyframes glow-particle-float {
+  0% {
+    opacity: 0;
+    transform: translate(var(--p-x), 0);
+  }
+  15% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.45;
+    transform: translate(calc(var(--p-x) + var(--p-drift)), 40px);
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--p-x), 80px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-beam-particle {
+    animation: none !important;
+    opacity: 0.35;
+  }
+}
+
+/* Yellow border bleed at beam impact point */
+.install-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -1px;
+  right: -1px;
+  height: 4px;
+  border-radius: 1rem 1rem 0 0;
+  background: radial-gradient(
+    ellipse 180px 3px at var(--beam-x, 57%) 50%,
+    var(--zama-yellow),
+    rgba(255, 210, 8, 0.35) 45%,
+    transparent 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Clip the internal glow so it doesn't leak without overflow-hidden on the card */
+.install-card-glow {
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+/* Glow on the dark install card — concentrated on the top border */
+.install-card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: radial-gradient(
+    ellipse 220px 50px at var(--beam-x, 57%) 0%,
+    rgba(255, 210, 8, 0.55),
+    rgba(255, 210, 8, 0.18) 35%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+/* Bright accent line along the top edge */
+.install-card-glow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: radial-gradient(
+    ellipse 160px 1px at var(--beam-x, 57%) 50%,
+    rgba(255, 210, 8, 0.8),
+    rgba(255, 210, 8, 0.25) 40%,
+    transparent 75%
+  );
+  box-shadow:
+    0 0 8px 2px rgba(255, 210, 8, 0.3),
+    0 0 20px 4px rgba(255, 210, 8, 0.1);
+}
+
+@keyframes glow-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* Hide beam and card glow effects below lg (1024px) */
+@media (max-width: 1023px) {
+  .glow-beam {
+    display: none;
+  }
+  .install-card::before,
+  .install-card-glow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-beam-halo,
+  .glow-beam-inner {
+    animation: none !important;
+  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -187,6 +378,65 @@ button:focus-visible {
   }
   .cube-field-tile {
     opacity: 0.7;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Border beam — rotating yellow ray that sweeps around card borders.
+ * Uses @property to animate a conic-gradient angle.
+ * ------------------------------------------------------------------------- */
+@property --beam-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.border-beam-card {
+  --beam-angle: 0deg;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--bg-surface), var(--bg-surface)) padding-box,
+    conic-gradient(
+      from var(--beam-angle),
+      var(--zama-yellow) 0%,
+      rgba(255, 210, 8, 0.3) 8%,
+      var(--border-default) 16%,
+      var(--border-default) 84%,
+      rgba(255, 210, 8, 0.3) 92%,
+      var(--zama-yellow) 100%
+    ) border-box;
+  animation: border-beam-rotate 4s linear infinite;
+}
+
+.border-beam-card:hover {
+  background:
+    linear-gradient(var(--bg-surface), var(--bg-surface)) padding-box,
+    conic-gradient(
+      from var(--beam-angle),
+      var(--zama-yellow) 0%,
+      rgba(255, 210, 8, 0.3) 8%,
+      var(--foreground) 16%,
+      var(--foreground) 84%,
+      rgba(255, 210, 8, 0.3) 92%,
+      var(--zama-yellow) 100%
+    ) border-box;
+}
+
+@keyframes border-beam-rotate {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .border-beam-card {
+    animation: none !important;
+    border-color: var(--border-default);
+    background: var(--bg-surface);
+  }
+  .border-beam-card:hover {
+    border-color: var(--foreground);
+    background: var(--bg-surface);
   }
 }
 
