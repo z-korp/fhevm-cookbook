@@ -83,6 +83,14 @@ button:focus-visible {
   width: 0;
   z-index: 0;
   pointer-events: none;
+  clip-path: inset(0 -200px 100% -200px round 0 0 50% 50%);
+  animation: beam-descend 2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+@keyframes beam-descend {
+  to {
+    clip-path: inset(0 -200px 0% -200px round 0);
+  }
 }
 
 /* Wide soft halo — hard cutoff before install section */
@@ -178,6 +186,8 @@ button:focus-visible {
   );
   z-index: 2;
   pointer-events: none;
+  opacity: 0;
+  animation: card-glow-reveal 0.6s ease-out 2s forwards;
 }
 
 /* Clip the internal glow so it doesn't leak without overflow-hidden on the card */
@@ -201,6 +211,8 @@ button:focus-visible {
   );
   pointer-events: none;
   z-index: 0;
+  opacity: 0;
+  animation: card-glow-reveal 0.6s ease-out 2s forwards;
 }
 /* Bright accent line along the top edge */
 .install-card-glow::after {
@@ -221,6 +233,12 @@ button:focus-visible {
     0 0 20px 4px rgba(255, 210, 8, 0.1);
 }
 
+@keyframes card-glow-reveal {
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes glow-breathe {
   0%,
   100% {
@@ -239,6 +257,19 @@ button:focus-visible {
   .install-card::before,
   .install-card-glow {
     display: none;
+  }
+}
+
+/* Skip descent and glow-reveal animations when user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .glow-beam {
+    clip-path: none;
+    animation: none !important;
+  }
+  .install-card::before,
+  .install-card-glow {
+    opacity: 1;
+    animation: none !important;
   }
 }
 
