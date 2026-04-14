@@ -1,29 +1,8 @@
-'use client';
-
-import { useEffect, useRef } from 'react';
 import CopyCommandButton from "@/components/CopyCommandButton";
 import { FULL_PACK_COMMAND, LIST_SKILLS_COMMAND } from "@/data/install";
 import { SKILLS_SH_URL } from "@/data/site";
 
 export default function InstallSection() {
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const update = () => {
-      const card = cardRef.current;
-      if (!card) return;
-      const main = card.closest('main');
-      if (!main) return;
-      const beamX = main.getBoundingClientRect().left + main.offsetWidth * 0.75;
-      const cardRect = card.getBoundingClientRect();
-      const pct = ((beamX - cardRect.left) / cardRect.width) * 100;
-      card.style.setProperty('--beam-x', `${pct}%`);
-    };
-
-    update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
-  }, []);
 
   return (
     <section
@@ -60,11 +39,8 @@ export default function InstallSection() {
         <div className="flex flex-col gap-3">
           {/* Primary (dark) command card */}
           <div
-            ref={cardRef}
-            className="install-card relative rounded-2xl border border-foreground bg-foreground p-5 sm:p-6"
+            className="relative rounded-2xl border border-foreground bg-foreground p-5 sm:p-6"
           >
-            {/* Beam impact glow */}
-            <div aria-hidden="true" className="install-card-glow" />
             <div className="relative z-10">
               <div className="mb-3 flex items-center justify-between gap-3">
                 <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-zama-yellow">

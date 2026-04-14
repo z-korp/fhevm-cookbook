@@ -1,6 +1,7 @@
 import { skills } from '@/data/skills';
 import { DOCS_URL } from '@/data/site';
 import HeroTitle from '@/components/HeroTitle';
+import HeroBustWrapper from '@/components/HeroBustWrapper';
 
 const fhevmSkillCount = skills.filter((s) => s.topic === 'fhevm' && s.id !== 'fhevm-router').length;
 const erc7984SkillCount = skills.filter((s) => s.topic === 'oz-erc7984').length;
@@ -14,6 +15,11 @@ export default function HeroSection() {
         aria-hidden="true"
         className="hero-grid pointer-events-none absolute inset-0"
       />
+
+      {/* 3D bust on the right — hidden on small screens */}
+      <div className="hidden lg:block absolute right-0 top-8 bottom-8 w-[420px] z-0">
+        <HeroBustWrapper />
+      </div>
 
       <div className="relative z-10 max-w-[620px]">
         <HeroTitle />
