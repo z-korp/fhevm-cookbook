@@ -83,13 +83,13 @@ button:focus-visible {
   width: 0;
   z-index: 0;
   pointer-events: none;
-  clip-path: inset(0 -200px 100% -200px round 0 0 50% 50%);
+  clip-path: ellipse(200px 0% at 50% 0%);
   animation: beam-descend 2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
 }
 
 @keyframes beam-descend {
   to {
-    clip-path: inset(0 -200px 0% -200px round 0);
+    clip-path: ellipse(200px 100% at 50% 0%);
   }
 }
 
