@@ -33,7 +33,7 @@ export default function HeroSection() {
           </a>
           <a
             href="/skills"
-            className="inline-flex items-center rounded-full border border-border-strong px-6 py-[13px] text-[13px] font-semibold tracking-[0.025em] text-foreground transition-colors hover:border-foreground"
+            className="border-beam-pill inline-flex items-center rounded-full border border-border-strong px-6 py-[13px] text-[13px] font-semibold tracking-[0.025em] text-foreground transition-colors hover:border-foreground"
           >
             Browse {skills.length} skills
           </a>

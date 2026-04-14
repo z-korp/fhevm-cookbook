@@ -428,6 +428,28 @@ button:focus-visible {
   }
 }
 
+/* Border beam pill — hover-only variant for pill-shaped buttons.
+ * The animation runs continuously so the ray position is seamless on hover. */
+.border-beam-pill {
+  --beam-angle: 0deg;
+  animation: border-beam-rotate 4s linear infinite;
+}
+
+.border-beam-pill:hover {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--background), var(--background)) padding-box,
+    conic-gradient(
+      from var(--beam-angle),
+      var(--zama-yellow) 0%,
+      rgba(255, 210, 8, 0.3) 8%,
+      var(--foreground) 16%,
+      var(--foreground) 84%,
+      rgba(255, 210, 8, 0.3) 92%,
+      var(--zama-yellow) 100%
+    ) border-box;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .border-beam-card {
     animation: none !important;
@@ -437,6 +459,13 @@ button:focus-visible {
   .border-beam-card:hover {
     border-color: var(--foreground);
     background: var(--bg-surface);
+  }
+  .border-beam-pill {
+    animation: none !important;
+  }
+  .border-beam-pill:hover {
+    border-color: var(--foreground);
+    background: none;
   }
 }
 

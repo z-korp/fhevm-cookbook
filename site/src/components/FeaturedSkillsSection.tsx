@@ -64,7 +64,7 @@ export default function FeaturedSkillsSection() {
         </div>
         <Link
           href="/skills"
-          className="inline-flex items-center rounded-full border border-border-strong px-5 py-[10px] text-[12px] font-semibold uppercase tracking-[0.22em] text-foreground transition-colors hover:border-foreground"
+          className="border-beam-pill inline-flex items-center rounded-full border border-border-strong px-5 py-[10px] text-[12px] font-semibold uppercase tracking-[0.22em] text-foreground transition-colors hover:border-foreground"
         >
           All {skills.length} →
         </Link>
