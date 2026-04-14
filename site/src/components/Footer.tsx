@@ -5,8 +5,8 @@ const ZKORP_X_URL = "https://x.com/zKorp_";
 
 export default function Footer() {
   return (
-    <footer className="py-10 px-6 sm:px-8">
-      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 text-[11px] uppercase tracking-[0.22em] text-muted sm:flex-row sm:items-center">
+    <footer className="px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 text-[11px] uppercase tracking-[0.22em] text-muted sm:flex-row sm:items-center">
         <div className="flex items-center gap-3">
           <span aria-hidden="true" className="size-2.5 rounded-full bg-zama-yellow" />
           <p className="normal-case tracking-normal text-[13px] text-secondary">
@@ -15,7 +15,7 @@ export default function Footer() {
               href={ZKORP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-foreground transition-colors hover:text-zama-yellow"
+              className="font-semibold text-foreground transition-colors hover:underline"
             >
               zKorp
             </a>

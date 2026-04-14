@@ -4,9 +4,8 @@ import { useRef } from "react";
 import ScrambleText, { type ScrambleTextHandle } from "./ScrambleText";
 
 /**
- * Hero headline with a ciphertext → plaintext decrypt animation. Runs on mount
- * and replays when the user hovers the title — "without the guesswork" only
- * after watching it resolve, for a beat.
+ * Hero headline with a ciphertext → plaintext decrypt animation.
+ * Runs on mount and replays on hover.
  */
 export default function HeroTitle() {
   const line1 = useRef<ScrambleTextHandle>(null);
@@ -20,13 +19,13 @@ export default function HeroTitle() {
   return (
     <h1
       onMouseEnter={replay}
-      className="whitespace-nowrap text-[28px] font-semibold leading-[1.05] tracking-[-0.03em] text-foreground sm:text-[36px] lg:text-[44px]"
+      className="whitespace-nowrap text-[32px] font-semibold leading-[1.05] tracking-[-0.03em] text-foreground sm:text-[42px] lg:text-[52px]"
     >
-      <ScrambleText ref={line1} text="Confidential contracts." />
+      <ScrambleText ref={line1} text="The FHEVM cookbook" />
       <br />
       <ScrambleText
         ref={line2}
-        text="Without the guesswork."
+        text="for privacy builders."
         className="text-secondary"
         delay={220}
       />

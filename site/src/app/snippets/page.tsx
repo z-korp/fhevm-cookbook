@@ -7,7 +7,7 @@ import { getSnippetMetas } from "@/data/snippets";
 export const metadata: Metadata = {
   title: "Snippets | FHEVM Cookbook",
   description:
-    "Short, copyable recipes for common FHEVM tasks. Each article answers one question with prose and paste-ready code.",
+    "Specific snippets for FHEVM builders. Each article answers a concrete problem with prose, paste-ready code, and the reasoning behind the shape.",
 };
 
 function formatDate(iso: string) {
@@ -27,14 +27,14 @@ export default function SnippetsIndexPage() {
   return (
     <>
       <Header />
-      <main className="mx-auto w-full max-w-5xl flex-1 px-6 pt-16 pb-20">
+      <main className="mx-auto w-full max-w-[90rem] flex-1 px-5 pt-16 pb-20 sm:px-6 lg:px-8">
         <h1 className="mb-6 text-[56px] font-semibold leading-[0.95] tracking-[-0.035em] text-foreground sm:text-[72px] lg:text-[88px]">
           Snippets
         </h1>
         <p className="mb-12 max-w-2xl text-base leading-relaxed text-secondary sm:text-lg">
-          Short, copyable recipes. Each one answers a single &ldquo;how do I do
-          X on FHEVM?&rdquo; with prose, paste-ready code, and the reasoning
-          behind the shape.
+          Specific answers for real FHEVM problems. Use these when you need to
+          understand how to solve a concrete issue or make one exact thing
+          happen in your project.
         </p>
 
         {snippets.length === 0 ? (

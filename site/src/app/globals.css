@@ -543,14 +543,14 @@ button:focus-visible {
 }
 
 .snippet-prose a {
-  color: var(--zama-yellow);
+  color: var(--foreground);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
 }
 
 .snippet-prose a:hover {
-  color: var(--zama-yellow-hover);
+  color: var(--text-secondary);
 }
 
 .snippet-prose strong {

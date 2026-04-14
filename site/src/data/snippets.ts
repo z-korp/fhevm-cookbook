@@ -31,8 +31,14 @@ function readSnippetFile(slug: string): Snippet | null {
   };
 }
 
-function byUpdatedAtDesc<T extends { updated_at: string }>(a: T, b: T) {
-  return b.updated_at.localeCompare(a.updated_at);
+function byUpdatedAtDesc<T extends { updated_at: string; title: string; slug: string }>(a: T, b: T) {
+  const dateOrder = b.updated_at.localeCompare(a.updated_at);
+  if (dateOrder !== 0) return dateOrder;
+
+  const titleOrder = a.title.localeCompare(b.title);
+  if (titleOrder !== 0) return titleOrder;
+
+  return a.slug.localeCompare(b.slug);
 }
 
 export function getAllSnippets(): Snippet[] {

@@ -53,7 +53,7 @@ export default async function SnippetPage({
   return (
     <>
       <Header />
-      <main className="mx-auto w-full max-w-3xl flex-1 px-6 pt-16 pb-20">
+      <main className="mx-auto w-full max-w-[90rem] flex-1 px-5 pt-16 pb-20 sm:px-6 lg:px-8">
         <Link
           href="/snippets"
           className="mb-8 inline-block text-[11px] uppercase tracking-[0.18em] text-muted transition-colors hover:text-foreground"

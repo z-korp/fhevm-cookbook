@@ -8,7 +8,7 @@ const ROWS = 58;
 const CELL = 10;
 
 // ---------------------------------------------------------------------------
-// FHE glyph pattern (8Ã—13 per letter, 2-cell thick strokes, 2-cell gap).
+// FHE glyph pattern (8Ã-13 per letter, 2-cell thick strokes, 2-cell gap).
 // 1 = cube is part of a letter stroke, 0 = negative space.
 // ---------------------------------------------------------------------------
 const GLYPH_W = 8;
@@ -110,7 +110,7 @@ function buildCubes(): Cube[] {
 
   // Blob silhouette: cubes live inside an irregular radius whose boundary is
   // pushed in/out by noise, so the outer edge reads as organic â€” not a grid
-  // masked to an ellipse. Aspect scaling matches the 44Ã—58 rectangle.
+  // masked to an ellipse. Aspect scaling matches the 44Ã-58 rectangle.
   const baseRadius = Math.min(COLS, ROWS) * 0.48;
 
   for (let y = 0; y < ROWS; y++) {
@@ -219,3 +219,4 @@ export default function CubeField() {
     </div>
   );
 }
+

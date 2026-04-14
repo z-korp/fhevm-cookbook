@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 // "FHE" rendered as a 3D extrusion, rotated and shaded with the same donut.c
-// pipeline as AsciiTorus: each filled glyph cell becomes a 1Ã—1Ã—DEPTH cube,
+// pipeline as AsciiTorus: each filled glyph cell becomes a 1Ã-1Ã-DEPTH cube,
 // surface points are projected with a z-buffer, Lambert dot product with a
 // fixed light direction picks an ASCII luminance ramp character.
 //
@@ -14,7 +14,7 @@ import { useEffect, useRef, useState } from "react";
 const WIDTH = 56;
 const HEIGHT = 28;
 
-// 8Ã—13 glyphs lifted from the existing CubeField pattern so the F/H/E
+// 8Ã-13 glyphs lifted from the existing CubeField pattern so the F/H/E
 // silhouette stays consistent across the site.
 const LETTER_W = 8;
 const LETTER_H = 13;
@@ -330,3 +330,4 @@ export default function AsciiFhe() {
     </div>
   );
 }
+

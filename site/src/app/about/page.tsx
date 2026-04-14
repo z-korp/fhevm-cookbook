@@ -12,7 +12,7 @@ export default function AboutPage() {
   return (
     <>
       <Header />
-      <main className="mx-auto w-full max-w-5xl flex-1 px-6 pt-16 pb-20">
+      <main className="mx-auto w-full max-w-[90rem] flex-1 px-5 pt-16 pb-20 sm:px-6 lg:px-8">
         <h1 className="mb-6 text-[56px] font-semibold leading-[0.95] tracking-[-0.035em] text-foreground sm:text-[72px] lg:text-[88px]">
           About
         </h1>
@@ -27,7 +27,7 @@ export default function AboutPage() {
               href="https://zkorp.xyz"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zama-yellow transition-colors hover:text-zama-yellow-hover"
+              className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
             >
               zKorp
             </a>
@@ -58,7 +58,7 @@ export default function AboutPage() {
 
         {/* zKorp at Zama Builder Villa */}
         <div className="mt-12 rounded-2xl border border-border bg-surface/80 p-6 sm:p-8">
-          <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.24em] text-zama-yellow">
+          <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.24em] text-foreground">
             Built at Zama Builder Villa
           </p>
           <p className="text-sm leading-relaxed text-secondary sm:text-base">
@@ -79,7 +79,7 @@ export default function AboutPage() {
               href="https://x.com/zKorp_"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-zama-yellow/40 hover:text-zama-yellow"
+              className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-foreground"
             >
               @zKorp_
             </a>
@@ -87,13 +87,13 @@ export default function AboutPage() {
               href="https://zkorp.xyz"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-zama-yellow/40 hover:text-zama-yellow"
+              className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-foreground"
             >
               zkorp.xyz
             </a>
             <a
               href="mailto:contact@zkorp.xyz"
-              className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-zama-yellow/40 hover:text-zama-yellow"
+              className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-foreground"
             >
               contact@zkorp.xyz
             </a>
