@@ -27,11 +27,11 @@ export default function SnippetsIndexPage() {
   return (
     <>
       <Header />
-      <main className="mx-auto w-full max-w-[90rem] flex-1 px-5 pt-16 pb-20 sm:px-6 lg:px-8">
-        <h1 className="mb-6 text-[56px] font-semibold leading-[0.95] tracking-[-0.035em] text-foreground sm:text-[72px] lg:text-[88px]">
+      <main className="mx-auto w-full max-w-[90rem] flex-1 px-5 pt-14 pb-20 sm:px-6 sm:pt-16 lg:px-8">
+        <h1 className="mb-6 text-[40px] font-semibold leading-[0.98] tracking-[-0.035em] text-foreground sm:text-[56px] lg:text-[88px]">
           Snippets
         </h1>
-        <p className="mb-12 max-w-2xl text-base leading-relaxed text-secondary sm:text-lg">
+        <p className="mb-10 max-w-2xl text-base leading-relaxed text-secondary sm:mb-12 sm:text-lg">
           Specific answers for real FHEVM problems. Use these when you need to
           understand how to solve a concrete issue or make one exact thing
           happen in your project.

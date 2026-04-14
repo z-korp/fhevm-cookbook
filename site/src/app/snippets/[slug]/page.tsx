@@ -53,16 +53,16 @@ export default async function SnippetPage({
   return (
     <>
       <Header />
-      <main className="mx-auto w-full max-w-[90rem] flex-1 px-5 pt-16 pb-20 sm:px-6 lg:px-8">
+      <main className="mx-auto w-full max-w-[90rem] flex-1 px-5 pt-14 pb-20 sm:px-6 sm:pt-16 lg:px-8">
         <Link
           href="/snippets"
           className="mb-8 inline-block text-[11px] uppercase tracking-[0.18em] text-muted transition-colors hover:text-foreground"
         >
-          ← All snippets
+          {"←"} All snippets
         </Link>
 
         <header className="mb-10">
-          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+          <h1 className="text-[30px] font-semibold tracking-tight text-foreground sm:text-4xl">
             {snippet.title}
           </h1>
           {snippet.summary && (

@@ -132,6 +132,16 @@ export default function SkillsList({ openSkillId }: { openSkillId?: string }) {
     setActiveSkillId(openSkillId);
   }, [openSkillId]);
 
+  function handleSkillToggle(skillId: string, isOpen: boolean) {
+    setActiveSkillId((currentSkillId) => {
+      if (isOpen) {
+        return skillId;
+      }
+
+      return currentSkillId === skillId ? undefined : currentSkillId;
+    });
+  }
+
   const router = skills.find((s) => s.id === "fhevm-router");
   const fhevmSkills = skills.filter((s) => s.topic === "fhevm" && s.id !== "fhevm-router");
   const ozErc7984Skills = skills.filter((s) => s.topic === "oz-erc7984");
@@ -172,7 +182,7 @@ export default function SkillsList({ openSkillId }: { openSkillId?: string }) {
           <SkillCard
             skill={router}
             isOpen={activeSkillId === router.id}
-            onToggle={(skillId, isOpen) => setActiveSkillId(isOpen ? skillId : undefined)}
+            onToggle={handleSkillToggle}
           />
         </div>
       )}
@@ -196,9 +206,7 @@ export default function SkillsList({ openSkillId }: { openSkillId?: string }) {
                     key={skill.id}
                     skill={skill}
                     isOpen={activeSkillId === skill.id}
-                    onToggle={(skillId, isOpen) =>
-                      setActiveSkillId(isOpen ? skillId : undefined)
-                    }
+                    onToggle={handleSkillToggle}
                   />
                 ))}
               </div>
@@ -226,9 +234,7 @@ export default function SkillsList({ openSkillId }: { openSkillId?: string }) {
                     key={skill.id}
                     skill={skill}
                     isOpen={activeSkillId === skill.id}
-                    onToggle={(skillId, isOpen) =>
-                      setActiveSkillId(isOpen ? skillId : undefined)
-                    }
+                    onToggle={handleSkillToggle}
                   />
                 ))}
               </div>
@@ -256,9 +262,7 @@ export default function SkillsList({ openSkillId }: { openSkillId?: string }) {
                     key={skill.id}
                     skill={skill}
                     isOpen={activeSkillId === skill.id}
-                    onToggle={(skillId, isOpen) =>
-                      setActiveSkillId(isOpen ? skillId : undefined)
-                    }
+                    onToggle={handleSkillToggle}
                   />
                 ))}
               </div>

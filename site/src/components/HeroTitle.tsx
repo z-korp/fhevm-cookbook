@@ -19,7 +19,7 @@ export default function HeroTitle() {
   return (
     <h1
       onMouseEnter={replay}
-      className="whitespace-nowrap text-[32px] font-semibold leading-[1.05] tracking-[-0.03em] text-foreground sm:text-[42px] lg:text-[52px]"
+      className="max-w-[13ch] text-[32px] font-semibold leading-[1.05] tracking-[-0.03em] text-foreground sm:max-w-none sm:text-[42px] lg:text-[52px]"
     >
       <ScrambleText ref={line1} text="The FHEVM cookbook" />
       <br />

@@ -5,8 +5,8 @@ const ZKORP_X_URL = "https://x.com/zKorp_";
 
 export default function Footer() {
   return (
-    <footer className="px-4 py-10 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 text-[11px] uppercase tracking-[0.22em] text-muted sm:flex-row sm:items-center">
+    <footer className="px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 text-[11px] uppercase tracking-[0.22em] text-muted sm:flex-row sm:items-center sm:gap-6">
         <div className="flex items-center gap-3">
           <span aria-hidden="true" className="size-2.5 rounded-full bg-zama-yellow" />
           <p className="normal-case tracking-normal text-[13px] text-secondary">
@@ -19,10 +19,10 @@ export default function Footer() {
             >
               zKorp
             </a>
-            {" "}&mdash; privacy-first builders on Zama FHEVM.
+            {" "}privacy-first builders on Zama FHEVM.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-x-7 gap-y-2">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 sm:gap-x-7">
           <a
             href={REPO_URL}
             target="_blank"

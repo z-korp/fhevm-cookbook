@@ -21,7 +21,7 @@ function FeaturedCard({ skill, index }: { skill: Skill; index: number }) {
   return (
     <Link
       href={`/skills?skill=${encodeURIComponent(skill.id)}`}
-      className={`group flex flex-col rounded-2xl p-7 ${isPrimary ? "border-beam-card" : "border border-border bg-surface transition-colors hover:border-foreground"}`}
+      className={`group flex flex-col rounded-2xl p-5 sm:p-7 ${isPrimary ? "border-beam-card" : "border border-border bg-surface transition-colors hover:border-foreground"}`}
     >
       <div className="flex items-center justify-between">
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-muted">
@@ -30,7 +30,7 @@ function FeaturedCard({ skill, index }: { skill: Skill; index: number }) {
         <span aria-hidden="true" className="size-[6px] rounded-full bg-zama-yellow" />
       </div>
 
-      <h3 className="mt-5 font-mono text-[24px] font-semibold leading-[1.15] tracking-[-0.015em] text-foreground">
+      <h3 className="mt-5 font-mono text-[20px] font-semibold leading-[1.15] tracking-[-0.015em] text-foreground sm:text-[24px]">
         {skill.name}
       </h3>
 
@@ -62,13 +62,13 @@ export default function FeaturedSkillsSection() {
     );
 
   return (
-    <section className="border-b border-border py-20 sm:py-24">
-      <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
+    <section className="border-b border-border py-16 sm:py-20 lg:py-24">
+      <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:mb-12 sm:flex-row sm:items-end sm:gap-6">
         <div>
           <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.32em] text-foreground">
             ▸ 02 · Catalog
           </p>
-          <h2 className="text-[44px] font-semibold leading-[1.02] tracking-[-0.025em] text-foreground sm:text-[48px]">
+          <h2 className="text-[36px] font-semibold leading-[1.02] tracking-[-0.025em] text-foreground sm:text-[48px]">
             Custom FHEVM Skills.
           </h2>
           <p className="mt-4 max-w-[40rem] text-[16px] leading-[1.6] text-secondary">
