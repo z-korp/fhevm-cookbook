@@ -1,0 +1,5 @@
+node_modules/
+references-repo/
+.claude/
+.qodo/
+.DS_Store

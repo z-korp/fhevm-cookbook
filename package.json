@@ -1,0 +1,11 @@
+{
+  "name": "fhevm-cookbook",
+  "private": true,
+  "packageManager": "pnpm@10.32.1",
+  "scripts": {
+    "dev": "pnpm --filter site dev",
+    "build": "pnpm --filter site build",
+    "lint": "pnpm --filter site lint",
+    "start": "pnpm --filter site start"
+  }
+}

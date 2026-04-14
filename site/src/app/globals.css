@@ -1,0 +1,261 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --zama-yellow: #FFD208;
+  --zama-yellow-hover: #FFE04A;
+  --zama-yellow-dim: rgba(255, 210, 8, 0.15);
+  --bg-surface: #161616;
+  --bg-surface-hover: #1c1c1c;
+  --bg-header: rgba(10, 10, 10, 0.8);
+  --border-default: #222222;
+  --text-secondary: #888888;
+  --text-muted: #555555;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-zama-yellow: var(--zama-yellow);
+  --color-zama-yellow-hover: var(--zama-yellow-hover);
+  --color-zama-yellow-dim: var(--zama-yellow-dim);
+  --color-surface: var(--bg-surface);
+  --color-surface-hover: var(--bg-surface-hover);
+  --color-header: var(--bg-header);
+  --color-border: var(--border-default);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background:
+    radial-gradient(circle at top, rgba(255, 210, 8, 0.08), transparent 28%),
+    linear-gradient(180deg, #0a0a0a 0%, #080808 100%);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--zama-yellow);
+  color: #0a0a0a;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--zama-yellow);
+  outline-offset: 2px;
+}
+
+.ascii-logo {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--zama-yellow);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 11px;
+  line-height: 1.1;
+  letter-spacing: 0;
+  font-kerning: none;
+  font-variant-ligatures: none;
+  white-space: pre;
+}
+
+@media (max-width: 720px) {
+  .ascii-logo {
+    font-size: 7px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Snippet prose — styling for ReactMarkdown output on /snippets/[slug]
+ * ------------------------------------------------------------------------- */
+.snippet-prose {
+  color: var(--foreground);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.snippet-prose > * + * {
+  margin-top: 1.1em;
+}
+
+.snippet-prose h2 {
+  margin-top: 2.4em;
+  margin-bottom: 0.6em;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+
+.snippet-prose h3 {
+  margin-top: 1.8em;
+  margin-bottom: 0.5em;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.snippet-prose p {
+  color: #cbcbcb;
+}
+
+.snippet-prose a {
+  color: var(--zama-yellow);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.snippet-prose a:hover {
+  color: var(--zama-yellow-hover);
+}
+
+.snippet-prose strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.snippet-prose ul,
+.snippet-prose ol {
+  padding-left: 1.4em;
+  color: #cbcbcb;
+}
+
+.snippet-prose ul {
+  list-style: disc;
+}
+
+.snippet-prose ol {
+  list-style: decimal;
+}
+
+.snippet-prose li + li {
+  margin-top: 0.3em;
+}
+
+.snippet-prose li::marker {
+  color: var(--text-muted);
+}
+
+.snippet-prose blockquote {
+  border-left: 2px solid var(--border-default);
+  padding-left: 1em;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.snippet-prose code {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.88em;
+}
+
+.snippet-prose :not(pre) > code {
+  background: #1c1c1c;
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  color: #f0f0f0;
+}
+
+.snippet-prose pre {
+  background: #111111;
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  padding: 1rem 1.15rem;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.snippet-prose pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: #e8e8e8;
+}
+
+.snippet-prose table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 13px;
+  width: 100%;
+}
+
+.snippet-prose th,
+.snippet-prose td {
+  border: 1px solid var(--border-default);
+  padding: 0.5rem 0.8rem;
+  text-align: left;
+}
+
+.snippet-prose th {
+  background: #141414;
+  color: var(--foreground);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.snippet-prose hr {
+  border: 0;
+  border-top: 1px solid var(--border-default);
+  margin: 2em 0;
+}
+
+/* highlight.js token colors — dark, restrained palette tuned to the brand */
+.snippet-prose .hljs-comment,
+.snippet-prose .hljs-quote {
+  color: #6b6b6b;
+  font-style: italic;
+}
+
+.snippet-prose .hljs-keyword,
+.snippet-prose .hljs-selector-tag,
+.snippet-prose .hljs-type {
+  color: #ffd860;
+}
+
+.snippet-prose .hljs-string,
+.snippet-prose .hljs-attr {
+  color: #a8d49b;
+}
+
+.snippet-prose .hljs-number,
+.snippet-prose .hljs-literal {
+  color: #e5a877;
+}
+
+.snippet-prose .hljs-title,
+.snippet-prose .hljs-title.function_,
+.snippet-prose .hljs-name {
+  color: #8fc7ff;
+}
+
+.snippet-prose .hljs-params,
+.snippet-prose .hljs-variable,
+.snippet-prose .hljs-built_in {
+  color: #e0e0e0;
+}
+
+.snippet-prose .hljs-meta,
+.snippet-prose .hljs-symbol,
+.snippet-prose .hljs-operator,
+.snippet-prose .hljs-punctuation {
+  color: #c1c1c1;
+}
