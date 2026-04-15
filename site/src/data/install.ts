@@ -20,7 +20,10 @@ export const CATEGORY_LABELS: Record<SkillCategory, string> = {
 };
 
 export const LIST_SKILLS_COMMAND = `npx skills add ${REPO_SLUG} --list`;
-export const FULL_PACK_COMMAND = `npx skills add ${REPO_SLUG} --all`;
+// `--all` is intentionally avoided because it expands to `--skill '*' --agent '*' -y`,
+// which installs into every agent dir the CLI knows about (~28 folders in a fresh repo).
+// Using `--skill '*'` alone lets the CLI auto-detect which agents the user has set up.
+export const FULL_PACK_COMMAND = `npx skills add ${REPO_SLUG} --skill '*'`;
 
 function uniqueSkillIds(skillIds: string[]) {
   return skillIds.filter((id, index) => skillIds.indexOf(id) === index);
