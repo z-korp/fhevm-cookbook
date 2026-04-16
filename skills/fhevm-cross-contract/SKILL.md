@@ -64,29 +64,34 @@ contract Vault {
 For multi-hop flows, document and implement the full chain. Each contract grants access
 to the next hop; each new FHE operation produces a new handle that needs its own downstream grants.
 
+Thread the originating user's address explicitly through the chain. Never rely on
+`tx.origin` for ACL grants: it is a known phishing footgun, and an intermediate
+contract may be called from another contract, so `tx.origin` is not guaranteed to
+be the user you think it is.
+
 ```solidity
 contract ContractA {
     function process(euint64 input) external {
         euint64 result = FHE.mul(input, rate);
         FHE.allowTransient(result, address(contractB));
-        contractB.process(result);
+        contractB.process(result, msg.sender);
     }
 }
 
 contract ContractB {
-    function process(euint64 input) external {
+    function process(euint64 input, address user) external {
         euint64 result = FHE.add(input, bonus);
         FHE.allowTransient(result, address(contractC));
-        contractC.finalize(result);
+        contractC.finalize(result, user);
     }
 }
 
 contract ContractC {
-    function finalize(euint64 input) external {
+    function finalize(euint64 input, address user) external {
         euint64 finalResult = FHE.sub(input, fee);
         FHE.allowThis(finalResult);
-        FHE.allow(finalResult, tx.origin);
-        _results[tx.origin] = finalResult;
+        FHE.allow(finalResult, user);
+        _results[user] = finalResult;
     }
 }
 ```

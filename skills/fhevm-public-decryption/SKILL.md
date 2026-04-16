@@ -105,7 +105,7 @@ documented 2048-bit relayer limit.
 ```solidity
 function finalizeUnwrap(uint64 cleartext, bytes calldata decryptionProof) external {
     euint64 handle = _pendingUnwraps[msg.sender];
-    require(euint64.unwrap(handle) != 0, "No pending unwrap");
+    require(euint64.unwrap(handle) != bytes32(0), "No pending unwrap");
 
     // Verify the proof — this is the critical security check
     bytes32[] memory handles = new bytes32[](1);
