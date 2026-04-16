@@ -162,4 +162,4 @@ is already proven.
 
 ## Reference
 
-- Source: [references-repo/openzeppelin-confidential-contracts/contracts/utils/FHESafeMath.sol](../../references-repo/openzeppelin-confidential-contracts/contracts/utils/FHESafeMath.sol)
+- Source: [OpenZeppelin `FHESafeMath.sol`](https://github.com/OpenZeppelin/openzeppelin-confidential-contracts/blob/master/contracts/utils/FHESafeMath.sol)

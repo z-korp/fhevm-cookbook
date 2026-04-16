@@ -94,7 +94,7 @@ function finalizeTally(
     bytes calldata decryptionProof
 ) external {
     bytes32[] memory handles = new bytes32[](1);
-    handles[0] = euint64.unwrap(_tallies[proposalId][option]);
+    handles[0] = FHE.toBytes32(_tallies[proposalId][option]);
     FHE.checkSignatures(handles, abi.encode(cleartextTally), decryptionProof);
 
     _revealedTally[proposalId][option] = cleartextTally;
@@ -127,7 +127,7 @@ function finalizeQuorumCheck(
     bytes calldata decryptionProof
 ) external {
     bytes32[] memory handles = new bytes32[](1);
-    handles[0] = ebool.unwrap(_quorumMetHandle[proposalId]);
+    handles[0] = FHE.toBytes32(_quorumMetHandle[proposalId]);
     FHE.checkSignatures(handles, abi.encode(quorumMetClear), decryptionProof);
 
     if (quorumMetClear) {

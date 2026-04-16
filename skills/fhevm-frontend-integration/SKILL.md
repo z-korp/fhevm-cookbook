@@ -27,17 +27,19 @@ plaintext only to authorized parties.
 
 Three packages show up in frontend work, but they are not interchangeable:
 
-- `@zama-fhe/relayer-sdk` (v0.4.2) — the lower-level relayer layer documented in the official webapp guides; owns `initSDK` / `createInstance` and exposes `web`, `node`, and `bundle` entry points
-- `@zama-fhe/sdk` (v2.2.0) — higher-level TypeScript SDK; exports `RelayerWeb`, `ZamaSDK`, storage helpers, token abstractions, and shared types
-- `@zama-fhe/react-sdk` (v2.2.0) — React bindings over `@zama-fhe/sdk`; exports `ZamaProvider`, `useEncrypt`, `useUserDecrypt`, `usePublicDecrypt`, and higher-level token hooks
+- `@zama-fhe/relayer-sdk` — the lower-level relayer layer documented in the official webapp guides; owns `initSDK` / `createInstance` and exposes `web`, `node`, and `bundle` entry points
+- `@zama-fhe/sdk` — higher-level TypeScript SDK; exports `RelayerWeb`, `ZamaSDK`, storage helpers, token abstractions, and shared types
+- `@zama-fhe/react-sdk` — React bindings over `@zama-fhe/sdk`; exports `ZamaProvider`, `useEncrypt`, `useUserDecrypt`, `usePublicDecrypt`, and higher-level token hooks
+
+Always check npm for current versions — this skill does not pin them.
 
 ## SDK Package Inventory
 
-| Package | Version | Role | Runtime |
-| ------- | ------- | ---- | ------- |
-| `@zama-fhe/relayer-sdk` | 0.4.2 | Low-level relayer client; official `initSDK` / `createInstance` path | `web`, `node`, `bundle` entry points |
-| `@zama-fhe/sdk` | 2.2.0 | Higher-level SDK with `RelayerWeb`, `ZamaSDK`, storage, token helpers | Browser-first plus `./node` export |
-| `@zama-fhe/react-sdk` | 2.2.0 | React bindings with `ZamaProvider` and hooks | Client-side React |
+| Package | Role | Runtime |
+| ------- | ---- | ------- |
+| `@zama-fhe/relayer-sdk` | Low-level relayer client; official `initSDK` / `createInstance` path | `web`, `node`, `bundle` entry points |
+| `@zama-fhe/sdk` | Higher-level SDK with `RelayerWeb`, `ZamaSDK`, storage, token helpers | Browser-first plus `./node` export |
+| `@zama-fhe/react-sdk` | React bindings with `ZamaProvider` and hooks | Client-side React |
 
 For browser apps, keep React hooks and browser relayer usage inside client-only boundaries.
 Do not describe all three packages as browser-only in general: `@zama-fhe/sdk` and
