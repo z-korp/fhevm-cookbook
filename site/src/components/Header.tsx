@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import icon from "@/app/icon.svg";
 import { CONTENT_LAST_UPDATED_ISO, CONTENT_LAST_UPDATED_LABEL } from "@/data/content-last-updated";
 import { REPO_URL } from "@/data/site";
 import InstallActionButton from "@/components/InstallActionButton";
@@ -17,9 +19,11 @@ export default function Header() {
       <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-3 px-5 py-3 sm:gap-6 sm:px-6 lg:px-9">
         <div className="flex min-w-0 flex-col gap-1">
           <div className="flex items-center gap-3">
-            <span
-              aria-hidden="true"
-              className="inline-block size-2.5 shrink-0 rounded-full bg-zama-yellow shadow-[0_0_0_4px_rgba(255,210,8,0.16)]"
+            <Image
+              src={icon}
+              alt="FHEVM Cookbook"
+              className="size-6 shrink-0"
+              priority
             />
             <Link
               href="/"
